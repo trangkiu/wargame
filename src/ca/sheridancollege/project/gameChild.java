@@ -17,32 +17,42 @@ public class gameChild extends Game {
 
     @Override
     public void setPlayers(ArrayList<Player> players) {
+        boolean flag = true;
+        do {
+            try {
 
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter the name for first player : ");
-        String playerName1 = input.nextLine();
+                Scanner input = new Scanner(System.in);
+                System.out.println("Enter the name for first player : ");
+                String playerName1 = input.nextLine();
+                if (playerName1.length() == 0) {
+                    throw new Exception();
+                }
+                Player player1 = new playerChild(playerName1);
 
-        Player player1 = new playerChild(playerName1);
+                System.out.println("Enter the name for second player : ");
+                String playerName2 = input.nextLine();
+                if (playerName2.length() == 0) {
+                    throw new Exception();
+                }
+                Player player2 = new playerChild(playerName2);
 
-        System.out.println("Enter the name for second player : ");
-        String playerName2 = input.nextLine();
-
-        Player player2 = new playerChild(playerName2);
-
-        players.add(player1);
-        players.add(player2);
-
+                players.add(player1);
+                players.add(player2);
+                flag = false;
+            } catch (Exception e) {
+                System.out.println("Please enter your name");
+            }
+        } while (flag);
         super.setPlayers(players);
     }
 
     @Override
     public void play() {
 
-
     }
 
 //    @Override
-    public void declareWinner(Player player1, Player player2) {
+    public static void declareWinner(Player player1, Player player2) {
         if (player1.getDeck().size() > player2.getDeck().size()) {
             System.out.println(player1.getPlayerID() + " win");
         } else if (player2.getDeck().size() > player1.getDeck().size()) {
@@ -53,7 +63,7 @@ public class gameChild extends Game {
 
     }
 
-    public void drawADeck(ArrayList<Card> deck) {
+    public static void drawADeck(ArrayList<Card> deck) {
         for (Suit suit : Suit.values()) {
             for (Rank rank : Rank.values()) {
                 deck.add(new cards(rank, suit));
@@ -61,8 +71,6 @@ public class gameChild extends Game {
         }
 
     }
-
-
 
     public void draw(ArrayList<Card> list1, ArrayList<Card> list2) {
         System.out.println("Player 1 draw : " + list1.get(0));
@@ -86,8 +94,8 @@ public class gameChild extends Game {
             war(list1, list2);
 
         }
-        System.out.println("Player 1 has : " + list1.size() +"cards");
-        System.out.println("Player 2 has : " + list2.size()+"cards");
+        System.out.println("Player 1 has : " + list1.size() + "cards");
+        System.out.println("Player 2 has : " + list2.size() + "cards");
     }
 
     public void war(ArrayList<Card> list1, ArrayList<Card> list2) {
@@ -101,8 +109,7 @@ public class gameChild extends Game {
         list1.remove(list1.get(0));
         list2.remove(list2.get(0));
         list2.remove(list2.get(0));
-        
-        
+
         System.out.println("Player 1 draw : " + list1.get(0));
         System.out.println("Player 2 draw : " + list2.get(0));
         if (list1.get(0).getRank().getValue() > list2.get(0).getRank().getValue()) {
@@ -121,7 +128,7 @@ public class gameChild extends Game {
 
     }
 
-    public void SplitCard(ArrayList<Card> list1, ArrayList<Card> list2, ArrayList<Card> deck) {
+    public static void SplitCard(ArrayList<Card> list1, ArrayList<Card> list2, ArrayList<Card> deck) {
 
         for (int x = 0; x < deck.size() / 2; x++) {
             list1.add(deck.get(x));

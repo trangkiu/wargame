@@ -72,7 +72,7 @@ public class gameChild extends Game {
 
     }
 
-    public void draw(ArrayList<Card> list1, ArrayList<Card> list2) {
+    public static void draw(ArrayList<Card> list1, ArrayList<Card> list2) {
         System.out.println("Player 1 draw : " + list1.get(0));
         System.out.println("Player 2 draw : " + list2.get(0));
 
@@ -98,7 +98,7 @@ public class gameChild extends Game {
         System.out.println("Player 2 has : " + list2.size() + "cards");
     }
 
-    public void war(ArrayList<Card> list1, ArrayList<Card> list2) {
+    public static void war(ArrayList<Card> list1, ArrayList<Card> list2) {
         ArrayList<Card> pile = new ArrayList<>();
         pile.add(list1.get(0));
         pile.add(list1.get(1));
